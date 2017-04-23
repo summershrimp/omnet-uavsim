@@ -1,0 +1,9 @@
+.settings/
+.project
+.tkenvlog
+.tkenvrc
+.cproject
+.cmdenv-log
+out/*
+results
+/UAVSim

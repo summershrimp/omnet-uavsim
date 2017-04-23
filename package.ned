@@ -1,0 +1,3 @@
+package uavsim;
+
+@license(LGPL);

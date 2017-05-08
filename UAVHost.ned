@@ -1,12 +1,23 @@
 package uavsim;
 
-import inet.node.inet.AdhocHost;
-//import inet.routing.extras.OLSR;
+import uavsim.uavnet.node.UAVModel.UAVBaseModel;
+import inet.applications.contract.IPingApp;
 
-module UAVHost extends AdhocHost
+module UAVHost extends UAVBaseModel
 {
-    parameters:
-        //routingProtocol = "OLSR";
-        //numPingApps = 1;
+	parameters:
+		int numPingTestApps = default(0);
+		
+	submodules:
+	     pingTestApp[numPingTestApps]: <default("PingTestApp")> like IPingApp {
+            parameters:
+                @display("p=635,210,row,60");
+        }
+        
+    connections allowunconnected:
+		for i=0..numPingTestApps-1 {
+            networkLayer.pingOut++ --> pingTestApp[i].pingIn;
+            networkLayer.pingIn++ <-- pingTestApp[i].pingOut;
+        }
 
 }

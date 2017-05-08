@@ -2,6 +2,7 @@
 .project
 .tkenvlog
 .tkenvrc
+.qtenvrc
 .cproject
 .cmdenv-log
 out/*

@@ -13,25 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package uavsim;
+package uavsim.uavnet.networklayer.contract;
 
-import inet.node.inet.AdhocHost;
-import inet.applications.contract.IPingApp;
-
-module AttackHost extends AdhocHost{
-	parameters:
-		int numPingTestApps = default(0);
-		
-	submodules:
-	     pingTestApp[numPingTestApps]: <default("PingTestApp")> like IPingApp {
-            parameters:
-                @display("p=635,210,row,60");
-        }
-        
-        
-    connections allowunconnected:
-		for i=0..numPingTestApps-1 {
-            networkLayer.pingOut++ --> pingTestApp[i].pingIn;
-            networkLayer.pingIn++ <-- pingTestApp[i].pingOut;
-        }
+moduleinterface IManetRouting
+{
+    @display("i=block/routing");
+    gates:
+        input ipIn;
+        output ipOut;
 }

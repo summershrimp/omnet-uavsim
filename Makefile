@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for UAVSim
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -O out -KINETMANET_PROJ=../inetmanet -L$$\(INETMANET_PROJ\)/out/$$\(CONFIGNAME\)/src -lINET
+#  opp_makemake -f --deep -O out -KINET_PROJ=../inet -I. -I$$\(INET_PROJ\)/src -L$$\(INET_PROJ\)/out/$$\(CONFIGNAME\)/src -lINET
 #
 
 # Name of target to be created (-o option)
@@ -15,13 +15,13 @@ USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(QTENV_LIBS) $(CMDENV_LI
 #USERIF_LIBS = $(QTENV_LIBS)
 
 # C++ include paths (with -I)
-INCLUDE_PATH =
+INCLUDE_PATH = -I. -I$(INET_PROJ)/src
 
 # Additional object and library files to link with
 EXTRA_OBJS =
 
 # Additional libraries (-L, -l options)
-LIBS = $(LDFLAG_LIBPATH)$(INETMANET_PROJ)/out/$(CONFIGNAME)/src  -lINET
+LIBS = $(LDFLAG_LIBPATH)$(INET_PROJ)/out/$(CONFIGNAME)/src  -lINET
 
 # Output directory
 PROJECT_OUTPUT_DIR = out
@@ -29,16 +29,56 @@ PROJECTRELATIVE_PATH =
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc, .msg and .sm files
-OBJS =
+OBJS = \
+    $O/uavnet/applications/pingapp/PingTestApp.o \
+    $O/uavnet/common/GlobalWirelessLinkInspector.o \
+    $O/uavnet/linklayer/xmac/AnyMacXmacLayer.o \
+    $O/uavnet/routing/manet/base/ManetAddress.o \
+    $O/uavnet/routing/manet/base/ManetNetfilterHook.o \
+    $O/uavnet/routing/manet/base/ManetRoutingBase.o \
+    $O/uavnet/routing/manet/dsr/dsr-pkt_omnet.o \
+    $O/uavnet/routing/manet/dsr/dsr-uu-omnetpp.o \
+    $O/uavnet/routing/manet/dsr/dsr-uu/dsr-ack.o \
+    $O/uavnet/routing/manet/dsr/dsr-uu/dsr-io.o \
+    $O/uavnet/routing/manet/dsr/dsr-uu/dsr-opt.o \
+    $O/uavnet/routing/manet/dsr/dsr-uu/dsr-pkt.o \
+    $O/uavnet/routing/manet/dsr/dsr-uu/dsr-rerr.o \
+    $O/uavnet/routing/manet/dsr/dsr-uu/dsr-rrep.o \
+    $O/uavnet/routing/manet/dsr/dsr-uu/dsr-rreq.o \
+    $O/uavnet/routing/manet/dsr/dsr-uu/dsr-srt.o \
+    $O/uavnet/routing/manet/dsr/dsr-uu/dsr_access_database.o \
+    $O/uavnet/routing/manet/dsr/dsr-uu/DsrDataBase.o \
+    $O/uavnet/routing/manet/dsr/dsr-uu/maint-buf.o \
+    $O/uavnet/routing/manet/dsr/dsr-uu/neigh.o \
+    $O/uavnet/routing/manet/dsr/dsr-uu/send-buf.o \
+    $O/uavnet/routing/manet/olsr/OLSR.o \
+    $O/uavnet/routing/manet/olsr/OLSR_ETX.o \
+    $O/uavnet/routing/manet/olsr/OLSR_ETX_dijkstra.o \
+    $O/uavnet/routing/manet/olsr/OLSR_ETX_state.o \
+    $O/uavnet/routing/manet/olsr/OLSR_rtable.o \
+    $O/uavnet/routing/manet/olsr/OLSR_state.o \
+    $O/uavnet/routing/manet/olsr/OLSROPT.o \
+    $O/uavnet/linklayer/xmac/XMacPkt_m.o \
+    $O/uavnet/routing/manet/base/ControlInfoBreakLink_m.o \
+    $O/uavnet/routing/manet/base/ControlManetRouting_m.o \
+    $O/uavnet/routing/manet/base/LocatorNotificationInfo_m.o \
+    $O/uavnet/routing/manet/base/MeshControlInfo_m.o \
+    $O/uavnet/routing/manet/olsr/OLSRpkt_m.o
 
 # Message files
-MSGFILES =
+MSGFILES = \
+    uavnet/linklayer/xmac/XMacPkt.msg \
+    uavnet/routing/manet/base/ControlInfoBreakLink.msg \
+    uavnet/routing/manet/base/ControlManetRouting.msg \
+    uavnet/routing/manet/base/LocatorNotificationInfo.msg \
+    uavnet/routing/manet/base/MeshControlInfo.msg \
+    uavnet/routing/manet/olsr/OLSRpkt.msg
 
 # SM files
 SMFILES =
 
 # Other makefile variables (-K)
-INETMANET_PROJ=../inetmanet
+INET_PROJ=../inet
 
 #------------------------------------------------------------------------------
 
@@ -63,7 +103,7 @@ include $(CONFIGFILE)
 # Simulation kernel and user interface libraries
 OMNETPP_LIBS = $(OPPMAIN_LIB) $(USERIF_LIBS) $(KERNEL_LIBS) $(SYS_LIBS)
 ifneq ($(TOOLCHAIN_NAME),clangc2)
-LIBS += -Wl,-rpath,$(abspath $(INETMANET_PROJ)/out/$(CONFIGNAME)/src)
+LIBS += -Wl,-rpath,$(abspath $(INET_PROJ)/out/$(CONFIGNAME)/src)
 endif
 
 COPTS = $(CFLAGS) $(IMPORT_DEFINES)  $(INCLUDE_PATH) -I$(OMNETPP_INCL_DIR)

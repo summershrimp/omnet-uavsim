@@ -21,14 +21,17 @@ import inet.networklayer.configurator.ipv4.IPv4NetworkConfigurator;
 import inet.networklayer.ipv4.RoutingTableRecorder;
 import inet.physicallayer.ieee80211.packetlevel.*;
 import inet.physicallayer.pathloss.*;
+import inet.visualizer.integrated.IntegratedCanvasVisualizer;
 
-
-network UAVNetwork
+network TestNetwork
 {
     parameters:
         int numHosts;
         int numAttackHosts;
     submodules:
+//		visualizer: IntegratedCanvasVisualizer {
+// 			@display("p=580,125");
+//  		}
         radioMedium: Ieee80211ScalarRadioMedium {
             parameters:
                 @display("p=100,50");

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+DIR=`dirname $0`
+
+$DIR/UAVSim -r 0 -m -u Cmdenv -n ..:$DIR/../inet/examples:$DIR/../inet/src:$DIR/../inet/tutorials \
+        -l $DIR/../inet/src/INET --cmdenv-interactive=true --sim-time-limit=300s "$@"

@@ -7,6 +7,7 @@ module UAVHost extends UAVBaseModel
 {
 	parameters:
 		int numPingTestApps = default(0);
+		@display("i=device/quadcopter;");
 		
 	submodules:
 	     pingTestApp[numPingTestApps]: <default("PingTestApp")> like IPingApp {

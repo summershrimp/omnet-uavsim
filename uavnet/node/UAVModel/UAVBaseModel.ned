@@ -21,7 +21,7 @@ import uavsim.uavnet.networklayer.contract.IManetRouting;
 module UAVBaseModel extends WirelessHost
 {
     parameters:
-        @display("i=device/cellphone");
+        @display("i=device/drone");
         wlan[*].mgmtType = default("Ieee80211MgmtAdhoc");  // use adhoc management
         string routingProtocol @enum("AODVUU","DYMOUM","DYMO","DSRUU","OLSR","OLSR_ETX","DSDV_2","Batman") = default(""); 
         forwarding = default(true);

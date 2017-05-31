@@ -21,7 +21,7 @@ import inet.applications.contract.IPingApp;
 module AttackHost extends AdhocHost{
 	parameters:
 		int numPingTestApps = default(0);
-		
+		@display("i=device/antennatower;");
 	submodules:
 	     pingTestApp[numPingTestApps]: <default("PingTestApp")> like IPingApp {
             parameters:
